@@ -19,6 +19,7 @@ class State(TypedDict):
 
 # 开始节点
 def start_node(state:State):
+  print('-' * 20)
   print(f'\n{Fore.GREEN}{Style.BRIGHT}开始检测文件: {Fore.YELLOW}{Style.BRIGHT}{state["doc_title"]}{Style.RESET_ALL}\n')
   return state
 
@@ -46,41 +47,96 @@ workflow.add_edge('agent_decision',END)
 
 app = workflow.compile()
 
-
-# 读取测试数据库
-current_dir = os.path.dirname(os.path.abspath(__file__))
-conn = sqlite3.connect(os.path.join(current_dir, 'test_documents.db'))
-cursor = conn.cursor()
-cursor.execute('SELECT * FROM test')
-test_data = cursor.fetchall()
-conn.close()
-
-result_arr = []
-
-for data in test_data:
+def invoke(doc_title, doc_content):
   input_state = {
-    'doc_title': data[1],
-    'doc_content': data[2],
+    'doc_title': doc_title,
+    'doc_content': doc_content,
+    'agent_keyword_result': False,
+    'agent_keyword_detail': '',
+    'agent_semantics_result': False,
+    'agent_semantics_detail': '',
+  }
+  final_state = app.invoke(input_state)
+  return final_state
+
+def invoke_stream(doc_title, doc_content):
+  """流式执行工作流，打印过程并返回最终状态"""
+  input_state = {
+    'doc_title': doc_title,
+    'doc_content': doc_content,
     'agent_keyword_result': False,
     'agent_keyword_detail': '',
     'agent_semantics_result': False,
     'agent_semantics_detail': '',
     'agent_file_exclude_result': False,
     'agent_file_exclude_detail': '',
-    'result': False,
-    'result_detail': '',
   }
+  
+  # 收集最终状态
+  final_state = {}
+  
+  # 遍历并打印每个节点的执行
+  for event in app.stream(input_state):
+    # event 是字典: {'节点名': {节点输出}}
+    for node_name, node_output in event.items():
+      print(f'{Fore.CYAN}节点: {node_name}{Style.RESET_ALL}')
+      print(f'{Fore.YELLOW}输出: {node_output}{Style.RESET_ALL}')
+      # 更新最终状态
+      final_state.update(node_output)
+  
+  print('\n')
+  return final_state
 
-  final_state = app.invoke(input_state)
-  result_arr.append(final_state['result'])
-  print(f'\n{Fore.BLUE}{Style.BRIGHT}最终结果:{Style.RESET_ALL}',flush=True)
-  print(f'{Fore.CYAN}{Style.BRIGHT}(正向)关键词检测结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_keyword_result"]}{Style.RESET_ALL}',flush=True)
-  print(f'{Fore.CYAN}{Style.BRIGHT}(正向)语义检测结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_semantics_result"]}{Style.RESET_ALL}',flush=True)
-  print(f'{Fore.CYAN}{Style.BRIGHT}(反向)文件排除结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_file_exclude_result"]}{Style.RESET_ALL}',flush=True)
-  print(f'{Fore.CYAN}{Style.BRIGHT}(结论)决策评审结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["result"]}{Style.RESET_ALL}',flush=True)
-  print(f'{Fore.CYAN}{Style.BRIGHT}检测结果详情:{Style.RESET_ALL}{Fore.YELLOW}{final_state["result_detail"]}{Style.RESET_ALL}',flush=True)
+def test():
+  # 读取测试数据库
+  current_dir = os.path.dirname(os.path.abspath(__file__))
+  conn = sqlite3.connect(os.path.join(current_dir, 'test_documents_2.db'))
+  cursor = conn.cursor()
+  cursor.execute('SELECT * FROM test')
+  test_data = cursor.fetchall()
+  conn.close()
 
-print(result_arr)
+  result_arr = []
+  test_arr = []
+
+  for data in test_data:
+    input_state = {
+      'doc_title': data[1],
+      'doc_content': data[2],
+      'agent_keyword_result': False,
+      'agent_keyword_detail': '',
+      'agent_semantics_result': False,
+      'agent_semantics_detail': '',
+      'agent_file_exclude_result': False,
+      'agent_file_exclude_detail': '',
+      'result': False,
+      'result_detail': '',
+    }
+
+    final_state = app.invoke(input_state)
+    result_arr.append(final_state['result'].__str__())
+    print(f'\n{Fore.BLUE}{Style.BRIGHT}最终结果:{Style.RESET_ALL}',flush=True)
+    print(f'{Fore.CYAN}{Style.BRIGHT}(正向)关键词检测结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_keyword_result"]}{Style.RESET_ALL}',flush=True)
+    print(f'{Fore.CYAN}{Style.BRIGHT}(正向)语义检测结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_semantics_result"]}{Style.RESET_ALL}',flush=True)
+    print(f'{Fore.CYAN}{Style.BRIGHT}(反向)非涉密判断结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["agent_file_exclude_result"]}{Style.RESET_ALL}',flush=True)
+    print(f'{Fore.CYAN}{Style.BRIGHT}(结论)决策评审结果:{Style.RESET_ALL}{Fore.YELLOW}{final_state["result"]}{Style.RESET_ALL}',flush=True)
+    print(f'{Fore.CYAN}{Style.BRIGHT}检测结果详情:{Style.RESET_ALL}{Fore.YELLOW}{final_state["result_detail"]}{Style.RESET_ALL}',flush=True)
+    print('-' * 20)
+    print('\n')
+  print(result_arr)
 
 
+  for test in test_data:
+    if test[3] == 1:
+      test_arr.append('True')
+    else:
+      test_arr.append('False')
+  print(test_arr)
 
+  successIndex = 0
+  for index, test_a in enumerate(test_arr):
+    if test_a == result_arr[index]:
+      successIndex += 1
+  print(f'{Fore.GREEN}{Style.BRIGHT}准确率:{Style.RESET_ALL}{Fore.YELLOW}{successIndex / len(test_arr) * 100}%{Style.RESET_ALL}')
+
+# test()
