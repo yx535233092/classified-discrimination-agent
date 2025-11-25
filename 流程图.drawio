@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.3">
+  <diagram name="第 1 页" id="4kIFg9k_aTMq4DrAXoiK">
+    <mxGraphModel dx="1216" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cZghrjnc127Ne11dHb3D-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-1" target="cZghrjnc127Ne11dHb3D-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-1" value="输入文件" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="60" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-2" target="cZghrjnc127Ne11dHb3D-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-2" value="Agent1: 关键词语义命中判断" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-10" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-3" target="cZghrjnc127Ne11dHb3D-43">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-3" target="cZghrjnc127Ne11dHb3D-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-3" value="是否命中" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="300" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-43" target="cZghrjnc127Ne11dHb3D-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-46" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cZghrjnc127Ne11dHb3D-45">
+          <mxGeometry x="-0.2444" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-43" value="命中关键词语义&lt;br&gt;And&lt;br&gt;置信度&amp;gt;90%" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="480" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-44" value="输出结论：涉密" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-47" target="cZghrjnc127Ne11dHb3D-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-47" value="Agent2: 上下文语义分析" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="476" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-49" target="cZghrjnc127Ne11dHb3D-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-49" value="Agent3: 验证是否为非涉密文件" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="476" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-51" value="Agent4: 综合三个智能体的判断结果，输出最终结论" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="476" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-54" target="cZghrjnc127Ne11dHb3D-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-61" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cZghrjnc127Ne11dHb3D-58">
+          <mxGeometry x="-0.22" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-54" target="cZghrjnc127Ne11dHb3D-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-62" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="cZghrjnc127Ne11dHb3D-60">
+          <mxGeometry x="0.3451" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-54" value="是否涉密" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="486" y="800" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="cZghrjnc127Ne11dHb3D-51" target="cZghrjnc127Ne11dHb3D-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-57" value="输出结论：涉密&lt;br&gt;输出证据链" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="476" y="1000" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cZghrjnc127Ne11dHb3D-59" value="输出结论：不涉密&lt;br&gt;输出证据链" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="660" y="1000" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
